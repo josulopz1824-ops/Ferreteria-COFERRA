@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Coferra - Ferretería</title>
+    <link rel="stylesheet" href="estilos-ferre.css">
+</head>
+<body>
+    <header>
+        <h1>FERRETERÍA COFERRA</h1>
+        <p>Calidad en herramientas y materiales de construcción.
+             Innovando día a día con herramientas de calidad.</p>
+        
+    </header>
+    <div class="contenedor-busqueda">
+    <div class="barra-busqueda">
+        <input type="text" id="inputBuscador" placeholder="¿Qué herramienta buscas hoy?" onkeyup="buscarProducto()">
+        <button class="btn-buscar"><i class="fas fa-search"></i> 🔍</button>
+    </div>
+</div>
+
+    <section class="seccion-categorias">
+    <h2>¿Qué estás buscando?</h2>
+    <div class="grid-categorias">
+        <div class="caja-cat" onclick="mostrarProductos('techos')">
+            <img src="iconos/techo.png" alt="">
+            <span>Materiales para Techos</span>
+        </div>
+        <div class="caja-cat" onclick="mostrarProductos('maquinas')">
+            <img src="iconos/taladro.png" alt="">
+            <span>Máquinas Eléctricas</span>
+        </div>
+        <div class="caja-cat" onclick="mostrarProductos('herramientas')">
+            <img src="iconos/herramientas.png" alt="">
+            <span>Herramientas</span>
+        </div>
+        <div class="caja-cat" onclick="mostrarProductos('construccion')">
+            <img src="iconos/construccion.png" alt="">
+            <span>Construcción</span>
+        </div>
+        <div class="caja-cat btn-ver-todos" onclick="mostrarProductos('todos')">
+            <span>Ver Todo</span>
+        </div>
+
+</section>
+
+<main id="contenedor-productos" class="grid-productos">
+    </main>
+
+    <main id="contenedor-productos" class="grid-productos">
+        </main>
+
+    <script src="productos.js"></script>
+
+<a href="https://wa.me/50432901909?text=Hola%20Coferra,%20tengo%20una%20consulta%20general" 
+   class="btn-flotante" 
+   target="_blank">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+   <span>Contáctanos</span>
+</a>
+</body>
+</html>
