@@ -1,86 +1,86 @@
 const productos = [
-    { id: 1, nombre: "Lámina de Zinc Aluzinc", categoria: "techos", imagen: "img/zinc.jpg", descripcion: "Lámina resistente a la corrosión.", whatsapp: "50432901909" },
-    { id: 2, nombre: "Taladro DeWalt 20V", categoria: "maquinas", imagen: "img/taladro.jpg", descripcion: "Potencia profesional para tus proyectos.", whatsapp: "50432901909" },
-    { id: 3, nombre: "Martillo de Uña Truper", categoria: "herramientas", imagen: "img/martillo.jpg", descripcion: "Acero forjado de alta calidad.", whatsapp: "50432901909" },
-    { id: 4, nombre: "Bolsa de Cemento", categoria: "construccion", imagen: "img/cemento.jpg", descripcion: "Cemento de alta resistencia.", whatsapp: "50432901909" },
-    { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "img/cemento.jpg", descripcion: "Varillas resistentes de punta azul.", whatsapp: "50432901909" },
-    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/cemento.jpg", descripcion: "Pala resistente para palar.", whatsapp: "50432901909" }
+    { id: 1, nombre: "Lámina de Zinc Aluzinc", categoria: "techos", imagen: "img/zinc.jpg", precio: "L. 250.00" },
+    { id: 2, nombre: "Taladro DeWalt 20V", categoria: "maquinas", imagen: "img/taladro.jpg", precio: "L. 3,500.00" },
+    { id: 3, nombre: "Martillo", categoria: "herramientas", imagen: "img/martillo.jpg", precio: "L. 180.00" },
+    { id: 4, nombre: "Bolsa de Cemento", categoria: "construccion", imagen: "img/cemento.jpg", precio: "L. 210.00" },
+    { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "img/varilla.jpg", precio: "L. 145.00" },
+    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/pala.jpg", precio: "L. 320.00" }
 ];
 
-function mostrarProductos(categoriaFiltrada = 'todos') {
-    const contenedor = document.getElementById('contenedor-productos');
-    if(!contenedor) return;
-
-    // Filtramos los productos según la categoría
-    const productosFiltrados = categoriaFiltrada === 'todos' 
-        ? productos 
-        : productos.filter(p => p.categoria === categoriaFiltrada);
-
-    contenedor.innerHTML = productosFiltrados.map(p => `
-        <div class="tarjeta-producto">
-            <img src="${p.imagen}" alt="${p.nombre}">
-            <div class="info">
-                <span class="categoria-tag">${p.categoria}</span>
-                <h3>${p.nombre}</h3>
-                <a href="detalle.html?id=${p.id}" class="btn-ver">Ver Detalles</a>
-            </div>
-        </div>
-    `).join('');
-};
-
-function buscarProducto() {
-    const texto = document.getElementById('inputBuscador').value.toLowerCase();
-    const productosFiltrados = productos.filter(p => 
-        p.nombre.toLowerCase().includes(texto) || 
-        p.categoria.toLowerCase().includes(texto)
-    );
-    renderizarProductos(productosFiltrados); // Usa una función que pinte el HTML
-};
-
-// Función para "dibujar" los productos en pantalla
+// --- FUNCIONES DEL CATÁLOGO ---
 function renderizarProductos(lista) {
     const contenedor = document.getElementById('contenedor-productos');
-    if (lista.length === 0) {
-        contenedor.innerHTML = `<p class="sin-resultados">No encontramos productos que coincidan con tu búsqueda.</p>`;
-        return;
-    }
-
+    if (!contenedor) return;
     contenedor.innerHTML = lista.map(p => `
         <div class="tarjeta-producto">
             <img src="${p.imagen}" alt="${p.nombre}">
             <div class="info">
-                <span class="categoria-tag">${p.categoria}</span>
                 <h3>${p.nombre}</h3>
-                <p class="precio">${p.precio}</p>
-                <a href="detalle.html?id=${p.id}" class="btn-ver">Ver Detalles</a>
+                <span class="precio">${p.precio}</span>
+                <a href="https://wa.me/50432901909?text=Busco ${p.nombre}" class="btn-ver">Consultar</a>
             </div>
         </div>
     `).join('');
 }
 
-// ESTA ES LA FUNCIÓN QUE HACE LA MAGIA
+function mostrarProductos(cat) {
+    const filtrados = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
+    renderizarProductos(filtrados);
+}
+
 function buscarProducto() {
     const texto = document.getElementById('inputBuscador').value.toLowerCase();
-    
-    // Filtramos el array de productos comparando el nombre o la categoría
-    const filtrados = productos.filter(p => 
-        p.nombre.toLowerCase().includes(texto) || 
-        p.categoria.toLowerCase().includes(texto)
-    );
-
+    const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
     renderizarProductos(filtrados);
-};
+}
 
-contenedor.innerHTML = lista.map(p => `
-    <div class="tarjeta-producto">
-        <img src="${p.imagen}" alt="${p.nombre}">
-        <div class="info">
-            <span class="categoria-tag">${p.categoria}</span>
-            <h3>${p.nombre}</h3>
-            <p class="cta-consulta">Precio bajo consulta</p> 
-            <a href="detalle.html?id=${p.id}" class="btn-ver">Consultar Disponibilidad</a>
-        </div>
-    </div>
-`).join('');
+// --- FUNCIONES DEL CHATBOT ---
+function toggleChat() {
+    const chat = document.getElementById('ventana-chat');
+    chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+}
 
+function enviarMensaje() {
+    const input = document.getElementById('user-input');
+    const texto = input.value.trim();
+    if (!texto) return;
+
+    agregarBurbuja(texto, 'user');
+    input.value = "";
+
+    setTimeout(() => {
+        const respuesta = generarRespuesta(texto);
+        agregarBurbuja(respuesta, 'bot');
+    }, 600);
+}
+
+function generarRespuesta(mensaje) {
+    const msj = mensaje.toLowerCase();
+    
+    // Buscar si el mensaje menciona algún producto
+    const encontrado = productos.find(p => msj.includes(p.nombre.toLowerCase()));
+
+    if (encontrado) {
+        return `¡Sí! El ${encontrado.nombre} está disponible y tiene un precio de ${encontrado.precio}.`;
+    }
+    
+    if (msj.includes("hola")) return "¡Hola! ¿En qué producto de Coferra estás interesado?";
+    return "No encontré ese producto, pero pregúntale al jefe por WhatsApp.";
+}
+
+function agregarBurbuja(texto, clase) {
+    const body = document.getElementById('chat-body');
+    const div = document.createElement('div');
+    div.className = `msg ${clase}`;
+    div.innerText = texto;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+}
+
+// Iniciar
 window.onload = () => mostrarProductos('todos');
+
+// Escuchar tecla Enter en el chat
+document.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter' && document.activeElement.id === 'user-input') enviarMensaje();
+});
