@@ -1,86 +1,87 @@
-const productos = [
-    { id: 1, nombre: "Lámina de Zinc Aluzinc", categoria: "techos", imagen: "img/zinc.jpg", precio: "L. 250.00" },
-    { id: 2, nombre: "Taladro DeWalt 20V", categoria: "maquinas", imagen: "img/taladro.jpg", precio: "L. 3,500.00" },
-    { id: 3, nombre: "Martillo", categoria: "herramientas", imagen: "img/martillo.jpg", precio: "L. 180.00" },
-    { id: 4, nombre: "Bolsa de Cemento", categoria: "construccion", imagen: "img/cemento.jpg", precio: "L. 210.00" },
-    { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "img/varilla.jpg", precio: "L. 145.00" },
-    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/pala.jpg", precio: "L. 320.00" }
-];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería Coferra | Catálogo</title>
+    <link rel="stylesheet" href="estilos-ferre.css">
+</head>
+<body>
 
-// --- FUNCIONES DEL CATÁLOGO ---
-function renderizarProductos(lista) {
-    const contenedor = document.getElementById('contenedor-productos');
-    if (!contenedor) return;
-    contenedor.innerHTML = lista.map(p => `
-        <div class="tarjeta-producto">
-            <img src="${p.imagen}" alt="${p.nombre}">
-            <div class="info">
-                <h3>${p.nombre}</h3>
-                <span class="precio">${p.precio}</span>
-                <a href="https://wa.me/50432901909?text=Busco ${p.nombre}" class="btn-ver">Consultar</a>
+<header>
+    <h1>FERRETERÍA COFERRA</h1>
+    <p>Calidad en herramientas y materiales de construcción.</p>
+</header>
+
+<div class="contenedor-busqueda">
+    <div class="barra-busqueda">
+        <input type="text" id="inputBuscador" placeholder="¿Qué buscas hoy?" onkeyup="buscarProducto()">
+        <button class="btn-buscar">🔍</button>
+    </div>
+</div>
+
+<section class="seccion-categorias">
+    <div class="grid-categorias">
+        <div class="caja-cat" onclick="mostrarProductos('techos')"><span>Techos</span></div>
+        <div class="caja-cat" onclick="mostrarProductos('maquinas')"><span>Máquinas</span></div>
+        <div class="caja-cat" onclick="mostrarProductos('herramientas')"><span>Herramientas</span></div>
+        <div class="caja-cat" onclick="mostrarProductos('construccion')"><span>Construcción</span></div>
+        <div class="caja-cat btn-ver-todos" onclick="mostrarProductos('todos')"><span>Ver Todo</span></div>
+    </div>
+</section>
+
+<main id="contenedor-productos" class="grid-productos">
+    </main>
+
+<div class="botones-flotantes">
+    <a href="https://wa.me/50432901909" class="btn-redondo btn-wa" target="_blank" title="WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width:30px;">
+    </a>
+
+    <div id="chat-container">
+        <div id="ventana-chat">
+            <div class="chat-header">
+                <span>Asistente Coferra 🤖</span>
+                <span onclick="toggleChat()" style="cursor:pointer">×</span>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="msg bot">¡Hola! ¿Buscas algún producto? Prueba escribiendo: "Busco un taladro"</div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="user-input" placeholder="Escribe aquí...">
+                <button onclick="enviarMensaje()">OK</button>
             </div>
         </div>
-    `).join('');
-}
+        <button class="btn-redondo btn-chat" onclick="toggleChat()">💬</button>
+    </div>
+</div>
 
-function mostrarProductos(cat) {
-    const filtrados = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
-    renderizarProductos(filtrados);
-}
+<script src="productos.js"></script>
+<footer class="footer-coferra" style="background: #111; color: white; padding: 40px 20px; font-family: 'Segoe UI', sans-serif; margin-top: 50px;">
+    <div class="contenido-footer" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto;">
+        
+        <div class="footer-seccion">
+            <h3 style="color: #ff8c00; border-bottom: 2px solid #ff8c00; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; text-transform: uppercase;">Ferretería Coferra</h3>
+            <p style="margin: 5px 0; color: #ccc; font-size: 0.9rem;">San José de Comayagua, Honduras</p>
+            <div class="redes-sociales" style="margin-top: 15px;">
+                <a href="https://facebook.com/tu-pagina" target="_blank" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="18" alt="Facebook"> 
+                    Síguenos en Facebook
+                </a>
+            </div>
+        </div>
 
-function buscarProducto() {
-    const texto = document.getElementById('inputBuscador').value.toLowerCase();
-    const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
-    renderizarProductos(filtrados);
-}
+        <div class="footer-seccion">
+            <h3 style="color: #ff8c00; border-bottom: 2px solid #ff8c00; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; text-transform: uppercase;">Horarios de Atención</h3>
+            <p style="margin: 5px 0; color: #ccc; font-size: 0.9rem;">Lunes a Viernes: 7:00 AM - 5:00 PM</p>
+            <p style="margin: 5px 0; color: #ccc; font-size: 0.9rem;">Sábado: 7:00 AM - 12:00 PM</p>
+            <p style="margin: 5px 0; color: #ccc; font-size: 0.9rem;">Domingo: Cerrado</p>
+        </div>
+    </div>
 
-// --- FUNCIONES DEL CHATBOT ---
-function toggleChat() {
-    const chat = document.getElementById('ventana-chat');
-    chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-}
-
-function enviarMensaje() {
-    const input = document.getElementById('user-input');
-    const texto = input.value.trim();
-    if (!texto) return;
-
-    agregarBurbuja(texto, 'user');
-    input.value = "";
-
-    setTimeout(() => {
-        const respuesta = generarRespuesta(texto);
-        agregarBurbuja(respuesta, 'bot');
-    }, 600);
-}
-
-function generarRespuesta(mensaje) {
-    const msj = mensaje.toLowerCase();
-    
-    // Buscar si el mensaje menciona algún producto
-    const encontrado = productos.find(p => msj.includes(p.nombre.toLowerCase()));
-
-    if (encontrado) {
-        return `¡Sí! El ${encontrado.nombre} está disponible y tiene un precio de ${encontrado.precio}.`;
-    }
-    
-    if (msj.includes("hola")) return "¡Hola! ¿En qué producto de Coferra estás interesado?";
-    return "No encontré ese producto, pero pregúntale al jefe por WhatsApp.";
-}
-
-function agregarBurbuja(texto, clase) {
-    const body = document.getElementById('chat-body');
-    const div = document.createElement('div');
-    div.className = `msg ${clase}`;
-    div.innerText = texto;
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
-}
-
-// Iniciar
-window.onload = () => mostrarProductos('todos');
-
-// Escuchar tecla Enter en el chat
-document.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter' && document.activeElement.id === 'user-input') enviarMensaje();
-});
+    <div class="footer-copy" style="border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; text-align: center; color: #666; font-size: 0.8rem;">
+        <p>&copy; 2026 Hecho por <strong style="color: #aaa;">Josué López</strong> <span style="color: #444;">| DKS-Dev</span></p>
+    </div>
+</footer>
+</body>
+</html>
