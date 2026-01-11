@@ -1,210 +1,73 @@
+/* =========================================
+   1. VARIABLES (Personaliza los colores aquí)
+   ========================================= */
 :root {
-    --principal: #ff8c00; /* Naranja Ferretero */
-    --oscuro: #2d2d2d;
-    --gris-claro: #f4f4f4;
+    --principal: #ff8c00;    /* Naranja Ferretero principal */
+    --oscuro: #2d2d2d;       /* Gris muy oscuro para contraste */
+    --gris-claro: #f4f4f4;   /* Fondo de la página */
+    --blanco: #ffffff;
+    --whatsapp: #25d366;     /* Verde oficial de WA */
+    --sombra: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   2. REGLAS BASE
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: var(--gris-claro);
-    margin: 0;
+    color: var(--oscuro);
+    line-height: 1.6;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   3. HEADER Y BUSQUEDA
+   ========================================= */
 header {
     background-color: var(--oscuro);
     color: white;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
     border-bottom: 5px solid var(--principal);
 }
 
-.grid-productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 40px;
-}
-
-.tarjeta-producto {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
-
-.tarjeta-producto:hover { transform: translateY(-5px); }
-
-.tarjeta-producto img { width: 100%; height: 200px; object-fit: cover; }
-
-.info { padding: 15px; }
-
-.categoria { color: var(--principal); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-
-.precio { font-size: 1.2rem; font-weight: bold; color: var(--oscuro); }
-
-.btn-ver {
-    display: block;
-    text-align: center;
-    background: var(--principal);
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-    font-weight: bold;
-};
-.seccion-categorias {
-    padding: 20px;
-    text-align: center;
-    background: #fff;
-}
-
-.grid-categorias {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    max-width: 1000px;
-    margin: 20px auto;
-}
-
-.caja-cat {
-    background: var(--oscuro);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-bottom: 4px solid var(--principal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.caja-cat:hover {
-    background: var(--principal);
-    transform: translateY(-5px);
-}
-
-.caja-cat span {
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-.btn-ver-todos {
-    background: #555;
-    border-bottom-color: #999;
-}
-
-/* Tag de categoría en la tarjeta */
-.categoria-tag {
-    background: #eee;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-};
-/* 1. Ajuste General para que nada se salga de la pantalla */
-* {
-    box-sizing: border-box; /* Esto evita que el padding rompa el ancho */
-}
-.btn-flotante {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25d366;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 1000;
-}
-
-img {
-    max-width: 100%; /* Las imágenes nunca serán más anchas que la pantalla */
-    height: auto;
-}
-
-/* 2. El Grid de Categorías (Los cuadros de arriba) */
-.grid-categorias {
-    display: grid;
-    /* En celulares pequeños: 2 columnas. En tablets/PC: auto-fit */
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 10px;
-    padding: 10px;
-}
-
-/* 3. El Grid de Productos */
-.grid-productos {
-    display: grid;
-    /* Una sola columna en celulares por defecto */
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 15px;
-}
-
-/* --- MEDIA QUERIES (La magia) --- */
-
-/* Cuando la pantalla sea más grande que un celular (Tablets en adelante) */
-@media (min-width: 600px) {
-    .grid-categorias {
-        grid-template-columns: repeat(4, 1fr); /* 4 cuadros por fila */
-    }
-    
-    .grid-productos {
-        grid-template-columns: repeat(2, 1fr); /* 2 productos por fila */
-    }
-}
-
-/* Cuando la pantalla sea de computadora (Desktop) */
-@media (min-width: 1000px) {
-    .grid-productos {
-        grid-template-columns: repeat(3, 1fr); /* 3 o 4 productos por fila */
-    }
-    
-    .grid-categorias {
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-}
-
-/* 4. Ajuste para el encabezado en celulares */
-header h1 {
-    font-size: 1.8rem; /* Un poco más pequeño en móviles */
-}
+header h1 { font-size: 2.2rem; margin-bottom: 10px; }
 
 .contenedor-busqueda {
-    padding: 30px 20px;
-    background: var(--gris-claro);
+    padding: 20px;
     display: flex;
     justify-content: center;
+    background: var(--blanco);
 }
 
 .barra-busqueda {
     display: flex;
     width: 100%;
     max-width: 600px;
-    background: white;
-    border-radius: 50px; /* Bordes bien redondeados */
+    border-radius: 50px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    border: 2px solid transparent;
+    box-shadow: var(--sombra);
+    border: 2px solid #ddd;
     transition: 0.3s;
 }
 
-.barra-busqueda:focus-within {
-    border-color: var(--principal); /* Se ilumina al hacer clic */
-}
+.barra-busqueda:focus-within { border-color: var(--principal); }
 
 .barra-busqueda input {
     border: none;
-    padding: 15px 25px;
+    padding: 12px 20px;
     width: 100%;
     outline: none;
     font-size: 1rem;
@@ -214,147 +77,291 @@ header h1 {
     background: var(--principal);
     border: none;
     color: white;
-    padding: 0 25px;
+    padding: 0 20px;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-.sin-resultados {
-    grid-column: 1 / -1; /* Ocupa todo el ancho */
-    text-align: center;
-    padding: 50px;
-    color: #888;
-    font-size: 1.2rem;
+/* =========================================
+   4. CATEGORÍAS (Cuadros de arriba)
+   ========================================= */
+.seccion-categorias { padding: 30px 15px; text-align: center; }
+
+.grid-categorias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+    gap: 12px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.cta-consulta {
-    color: #888;
-    font-style: italic;
-    font-size: 0.9rem;
+.caja-cat {
+    background: var(--oscuro);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-bottom: 4px solid var(--principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.caja-cat:hover {
+    background: var(--principal);
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   5. GRID DE PRODUCTOS
+   ========================================= */
+.grid-productos {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tarjeta-producto {
+    background: var(--blanco);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.tarjeta-producto:hover { transform: translateY(-5px); }
+
+.tarjeta-producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* Para que la herramienta se vea completa */
+    background: #f9f9f9;
+}
+
+.info { padding: 20px; text-align: center; }
+
+.categoria-tag {
+    background: #eee;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.precio {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--principal);
     margin: 10px 0;
 }
 
-.banner-consulta {
-    background: #f9f9f9;
-    padding: 20px;
+.btn-ver {
+    display: block;
+    background: var(--principal);
+    color: white;
+    text-decoration: none;
+    padding: 12px;
     border-radius: 8px;
-    border: 1px dashed var(--principal);
-    margin-top: 20px;
+    font-weight: bold;
 }
 
-/* Estilos del Botón Flotante */
-.btn-flotante {
+/* =========================================
+   6. COMPONENTES FLOTANTES (Chat / WA)
+   ========================================= */
+/* CONTENEDOR DE BOTONES FLOTANTES */
+.botones-flotantes {
     position: fixed;
-    bottom: 30px;
-    right: 60px;
-    background-color: #25d366;
-    color: white;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column; /* Apila uno arriba del otro */
+    gap: 15px; /* Espacio entre los botones */
+    z-index: 9999;
+}
+
+/* ESTILO BASE PARA AMBOS BOTONES */
+.btn-redondo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    border-radius: 50px;
+    justify-content: center;
+    color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 24px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 9999;
     transition: 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
-.btn-flotante img {
+.btn-redondo:hover {
+    transform: scale(1.1);
+}
+
+/* COLORES ESPECÍFICOS */
+.btn-wa {
+    background-color: #25d366; /* Verde WhatsApp */
+}
+
+.btn-chat {
+    background-color: var(--principal); /* Tu naranja ferretero */
+}
+
+/* Iconos (ajuste opcional) */
+.btn-redondo img {
     width: 30px;
-    height: 100px;
-    margin-right: 10px;
+    height: 30px;
 }
 
-.btn-flotante:hover {
-    transform: scale(1.1); /* Se agranda un poquito al pasar el mouse */
-    background-color: #128c7e;
+/* =========================================
+   7. MEDIA QUERIES (Ajustes de pantalla)
+   ========================================= */
+
+/* Tablets (600px o más) */
+@media (min-width: 600px) {
+    .grid-categorias { grid-template-columns: repeat(4, 1fr); }
+    .grid-productos { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* En celulares muy pequeños, podemos ocultar el texto y dejar solo el icono */
+/* Computadoras (1000px o más) */
+@media (min-width: 1000px) {
+    .grid-productos { grid-template-columns: repeat(3, 1fr); }
+    header h1 { font-size: 3rem; }
+}
+
+/* Ocultar texto de WA en pantallas pequeñas */
 @media (max-width: 480px) {
-    .btn-flotante span {
-        display: none;
-    }
-    .btn-flotante {
-        padding: 15px;
-        right: 20px;
-        bottom: 20px;
-    }
-    .btn-flotante img {
-        margin-right: 0;
-    }
+    .btn-flotante span { display: none; }
+    .btn-flotante { padding: 15px; border-radius: 50%; }
 }
-.footer-coferra {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    padding: 40px 20px 10px 20px;
-    margin-top: 50px;
+
+/* =========================================
+   ESTILOS EXCLUSIVOS DEL CHATBOT
+   ========================================= */
+
+/* Contenedor que agrupa WA y Chat */
+.botones-flotantes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10000;
+}
+
+/* Botones Redondos (WA y Chat) */
+.btn-redondo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-wa { background-color: #25d366; }
+.btn-chat { background-color: #ff8c00; color: white; font-size: 28px; }
+
+.btn-redondo:hover { transform: scale(1.1); }
+
+/* VENTANA DEL CHAT */
+#ventana-chat {
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+    display: none; /* Se activa con JS */
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    position: absolute;
+    bottom: 75px; /* Aparece arriba del botón naranja */
+    right: 0;
+    border: 1px solid #ddd;
+}
+
+/* Cabecera del Chat */
+.chat-header {
+    background: #2d2d2d;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Cuerpo del Chat */
+.chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Burbujas de Mensajes */
+.msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.bot {
+    background: #eee;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.user {
+    background: #ff8c00;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Pie del Chat (Input) */
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #eee;
+}
+
+.chat-footer input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
     font-size: 0.9rem;
 }
 
-.contenido-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 1000px;
-    margin: 0 auto;
-    gap: 30px;
+.chat-footer button {
+    background: none;
+    border: none;
+    color: #ff8c00;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 10px;
 }
-
-.footer-seccion {
-    flex: 1;
-    min-width: 250px;
-    margin-bottom: 20px;
-}
-
-.footer-seccion h3 {
-    color: var(--principal); /* Tu naranja ferretero */
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--principal);
-    display: inline-block;
-}
-
-.redes-sociales a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-.redes-sociales img {
-    width: 25px;
-    height: 25px;
-}
-
-.redes-sociales a:hover {
-    color: var(--principal);
-}
-
-.footer-copy {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-    font-size: 0.8rem;
-    color: #888;
-}
-
-.footer-copy strong {
-    color: #bbb;
-}
-
-/* Ajuste para móviles */
-@media (max-width: 600px) {
-    .contenido-footer {
-        flex-direction: column;
-        text-align: center;
-    }
-    .footer-seccion h3 {
-        display: block;
-    }
-}
-
