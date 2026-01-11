@@ -1,150 +1,86 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Ferretería Coferra | Herramientas y Construcción en San José</title>
-    <meta name="description" content="En Ferretería Coferra ofrecemos materiales para techos, herramientas eléctricas y construcción. ¡Contáctanos por WhatsApp para cotizaciones!">
-    <meta name="keywords" content="ferretería, Coferra, San José de Comayagua, herramientas, construcción, techos">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Coferra - Ferretería</title>
-    <link rel="stylesheet" href="estilos-ferre.css">
-</head>
-<body>
-    <header>
-        <h1>FERRETERÍA COFERRA</h1>
-        <p>Calidad en herramientas y materiales de construcción.
-             Innovando día a día con herramientas de calidad.</p>
-        
-    </header>
-    <div class="contenedor-busqueda">
-    <div class="barra-busqueda">
-        <input type="text" id="inputBuscador" placeholder="¿Qué herramienta buscas hoy?" onkeyup="buscarProducto()">
-        <button class="btn-buscar"><i class="fas fa-search"></i> 🔍</button>
-    </div>
-</div>
+const productos = [
+    { id: 1, nombre: "Lámina de Zinc Aluzinc", categoria: "techos", imagen: "img/zinc.jpg", precio: "L. 250.00" },
+    { id: 2, nombre: "Taladro DeWalt 20V", categoria: "maquinas", imagen: "img/taladro.jpg", precio: "L. 3,500.00" },
+    { id: 3, nombre: "Martillo", categoria: "herramientas", imagen: "img/martillo.jpg", precio: "L. 180.00" },
+    { id: 4, nombre: "Bolsa de Cemento", categoria: "construccion", imagen: "img/cemento.jpg", precio: "L. 210.00" },
+    { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "img/varilla.jpg", precio: "L. 145.00" },
+    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/pala.jpg", precio: "L. 320.00" }
+];
 
-    <section class="seccion-categorias">
-    <h2>¿Qué estás buscando?</h2>
-    <div class="grid-categorias">
-        <div class="caja-cat" onclick="mostrarProductos('techos')">
-            <img src="iconos/techo.png" alt="">
-            <span>Materiales para Techos</span>
-        </div>
-        <div class="caja-cat" onclick="mostrarProductos('maquinas')">
-            <img src="iconos/taladro.png" alt="">
-            <span>Máquinas Eléctricas</span>
-        </div>
-        <div class="caja-cat" onclick="mostrarProductos('herramientas')">
-            <img src="iconos/herramientas.png" alt="">
-            <span>Herramientas</span>
-        </div>
-        <div class="caja-cat" onclick="mostrarProductos('construccion')">
-            <img src="iconos/construccion.png" alt="">
-            <span>Construcción</span>
-        </div>
-        <div class="caja-cat btn-ver-todos" onclick="mostrarProductos('todos')">
-            <span>Ver Todo</span>
-        </div>
-
-</section>
-
-<main id="contenedor-productos" class="grid-productos">
-    </main>
-
-    <main id="contenedor-productos" class="grid-productos">
-        </main>
-
-    <script src="productos.js"></script>
-
-<a href="https://wa.me/50432901909?text=Hola%20Coferra,%20tengo%20una%20consulta%20general" 
-   class="btn-flotante" 
-   target="_blank">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-   <span>Contáctanos</span>
-</a>
-    <footer class="footer-coferra">
-    <div class="contenido-footer">
-        <div class="footer-seccion">
-            <h3>Ferretería Coferra</h3>
-            <p>San José de Comayagua, Honduras</p>
-            <div class="redes-sociales">
-                <a href="https://facebook.com/tu-pagina" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"> 
-                    Síguenos en Facebook
-                </a>
+// --- FUNCIONES DEL CATÁLOGO ---
+function renderizarProductos(lista) {
+    const contenedor = document.getElementById('contenedor-productos');
+    if (!contenedor) return;
+    contenedor.innerHTML = lista.map(p => `
+        <div class="tarjeta-producto">
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <div class="info">
+                <h3>${p.nombre}</h3>
+                <span class="precio">${p.precio}</span>
+                <a href="https://wa.me/50432901909?text=Busco ${p.nombre}" class="btn-ver">Consultar</a>
             </div>
         </div>
+    `).join('');
+}
 
-        <div class="footer-seccion">
-            <h3>Horarios de Atención</h3>
-            <p>Lunes a Viernes: 7:00 AM - 5:00 PM</p>
-            <p>Sábado: 7:00 AM - 12:00 PM</p>
-            <p>Domingo: Cerrado</p>
-        </div>
-    </div>
+function mostrarProductos(cat) {
+    const filtrados = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
+    renderizarProductos(filtrados);
+}
 
-    <div class="footer-copy">
-        <p>&copy; 2026 Hecho por <strong>Josué López</strong> DKS-Dev</p>
-    </div>
-</footer>
-    <div id="chatbot-container">
-    <div id="chat-window" class="hidden">
-        <div class="chat-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
-            <span>Asistente Coferra</span>
-            <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer; font-size:20px;">×</button>
-        </div>
-        <div class="chat-body">
-            <p class="msg-bot">¡Hola! 👋 Soy el asistente de Coferra. ¿En qué puedo ayudarte hoy?</p>
-            <div class="opciones-chat">
-                <button onclick="mensajeWhatsApp('¿Tienen disponibilidad de materiales para techo?')">🏠 Materiales de Techo</button>
-                <button onclick="mensajeWhatsApp('Quisiera cotizar unas máquinas eléctricas')">⚡ Máquinas Eléctricas</button>
-                <button onclick="mensajeWhatsApp('¿En qué parte de San José están ubicados?')">📍 Ubicación</button>
-            </div>
-        </div>
-    </div>
+function buscarProducto() {
+    const texto = document.getElementById('inputBuscador').value.toLowerCase();
+    const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
+    renderizarProductos(filtrados);
+}
 
-    <button class="btn-chat-flotante" onclick="toggleChat()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-        <span class="badge-online"></span>
-    </button>
-</div>
+// --- FUNCIONES DEL CHATBOT ---
+function toggleChat() {
+    const chat = document.getElementById('ventana-chat');
+    chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+}
 
-<style>
-    /* Estilos del Chatbot - Mente de Tiburón */
-    #chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif; }
-    .btn-chat-flotante { background: #25d366; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; position: relative; }
-    .btn-chat-flotante:hover { transform: scale(1.1); }
-    .btn-chat-flotante img { width: 35px; }
-    .badge-online { position: absolute; top: 5px; right: 5px; width: 12px; height: 12px; background: #00ff00; border: 2px solid white; border-radius: 50%; }
+function enviarMensaje() {
+    const input = document.getElementById('user-input');
+    const texto = input.value.trim();
+    if (!texto) return;
 
-    #chat-window { width: 300px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); overflow: hidden; margin-bottom: 15px; transition: 0.3s; }
-    .hidden { display: none; transform: translateY(20px); opacity: 0; }
+    agregarBurbuja(texto, 'user');
+    input.value = "";
+
+    setTimeout(() => {
+        const respuesta = generarRespuesta(texto);
+        agregarBurbuja(respuesta, 'bot');
+    }, 600);
+}
+
+function generarRespuesta(mensaje) {
+    const msj = mensaje.toLowerCase();
     
-    .chat-header { background: #075e54; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .chat-body { padding: 15px; }
-    .msg-bot { background: #e1ffc7; padding: 10px; border-radius: 10px; font-size: 14px; margin-bottom: 15px; }
+    // Buscar si el mensaje menciona algún producto
+    const encontrado = productos.find(p => msj.includes(p.nombre.toLowerCase()));
+
+    if (encontrado) {
+        return `¡Sí! El ${encontrado.nombre} está disponible y tiene un precio de ${encontrado.precio}.`;
+    }
     
-    .opciones-chat button { display: block; width: 100%; background: #f0f0f0; border: 1px solid #ddd; padding: 8px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; text-align: left; font-size: 13px; transition: 0.2s; }
-    .opciones-chat button:hover { background: #25d366; color: white; }
-</style>
+    if (msj.includes("hola")) return "¡Hola! ¿En qué producto de Coferra estás interesado?";
+    return "No encontré ese producto, pero pregúntale al jefe por WhatsApp.";
+}
 
-<script>
-    function toggleChat() {
-        const chat = document.getElementById('chat-window');
-        chat.classList.toggle('hidden');
-    }
+function agregarBurbuja(texto, clase) {
+    const body = document.getElementById('chat-body');
+    const div = document.createElement('div');
+    div.className = `msg ${clase}`;
+    div.innerText = texto;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+}
 
-    function mensajeWhatsApp(texto) {
-        const telefono = "50432901909";
-        const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
-        window.open(url, '_blank');
-    }
-</script>
-</body>
+// Iniciar
+window.onload = () => mostrarProductos('todos');
 
-</html>
-
-
-
-
+// Escuchar tecla Enter en el chat
+document.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter' && document.activeElement.id === 'user-input') enviarMensaje();
+});
