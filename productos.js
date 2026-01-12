@@ -5,9 +5,9 @@ const productos = [
     { id: 4, nombre: "Bolsa de Cemento Argos", categoria: "construccion", imagen: "https://tse4.mm.bing.net/th/id/OIP.GAVtxJs6XfT-iklFYxkFXwHaGf?rs=1&pid=ImgDetMain&o=7&rm=3", precio: "L. 210.00" },
     { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "https://tse4.mm.bing.net/th/id/OIP.wbkCgjxcCfmwGSOHjoT9hQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3", precio: "L. 145.00" },
     { id: 6, nombre: "Pala", categoria: "construccion", imagen: "https://http2.mlstatic.com/pala-modelo-espanol-puno-y-41-plg-truper-17165-D_NQ_NP_307321-MLM20773934617_062016-F.jpg", precio: "L. 320.00" },
-    { id: 7, nombre: "Cemento Gris", precio: 210, imagen: "https://tse4.mm.bing.net/th/id/OIP.9dcoKOr-5ri-hfuJyidQYwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
-    { id: 10, nombre: "Soldadora Profesional", precio: 10000, imagen: "https://m.media-amazon.com/images/I/81F0aUMa0SL._SL1500_.jpg" },
-    { id: 12, nombre: "Tornillos punta de broca", precio: 15, imagen: "https://tse1.mm.bing.net/th/id/OIP.vSiiyX7x9QUaj-6G6_5xxAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" }
+    { id: 7, nombre: "Cemento Gris", categoria: "construccion", precio: "L. 210.00", imagen: "https://tse4.mm.bing.net/th/id/OIP.9dcoKOr-5ri-hfuJyidQYwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" },
+    { id: 10, nombre: "Soldadora Profesional", categoria: "maquinas", precio: "L. 10,000.00", imagen: "https://m.media-amazon.com/images/I/81F0aUMa0SL._SL1500_.jpg" },
+    { id: 12, nombre: "Tornillos punta de broca", categoria: "herramientas", precio: "L. 15.00", imagen: "https://tse1.mm.bing.net/th/id/OIP.vSiiyX7x9QUaj-6G6_5xxAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" }
 ];
 
 // --- FUNCIONES DEL CATÁLOGO ---
@@ -20,7 +20,7 @@ function renderizarProductos(lista) {
             <div class="info">
                 <h3>${p.nombre}</h3>
                 <span class="precio">${p.precio}</span>
-                <a href="https://wa.me/50432901909?text=Busco ${p.nombre}" class="btn-ver">Consultar</a>
+                <a href="detalles.html?id=${p.id}" class="btn-ver">Consultar</a>
             </div>
         </div>
     `).join('');
@@ -87,7 +87,3 @@ window.onload = () => mostrarProductos('todos');
 document.addEventListener('keypress', (e) => {
     if(e.key === 'Enter' && document.activeElement.id === 'user-input') enviarMensaje();
 });
-
-
-
-
