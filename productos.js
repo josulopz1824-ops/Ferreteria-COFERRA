@@ -4,7 +4,13 @@ const productos = [
     { id: 3, nombre: "Martillo", categoria: "herramientas", imagen: "img/martillo.jpg", precio: "L. 180.00" },
     { id: 4, nombre: "Bolsa de Cemento", categoria: "construccion", imagen: "img/cemento.jpg", precio: "L. 210.00" },
     { id: 5, nombre: "Varilla", categoria: "construccion", imagen: "img/varilla.jpg", precio: "L. 145.00" },
-    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/pala.jpg", precio: "L. 320.00" }
+    { id: 6, nombre: "Pala", categoria: "construccion", imagen: "img/pala.jpg", precio: "L. 320.00" },
+    { id: 7, nombre: "Cemento Argos Gris", precio: 210, imagen: "cemento.jpg" },
+    { id: 8, nombre: "Varilla de hierro 3/8", precio: 500, imagen: "varilla.jpg" },
+    { id: 9, nombre: "Lámina de Zinc 10 pies", precio: 160, imagen: "zinc.jpg" },
+    { id: 10, nombre: "Soldadora Profesional", precio: 10000, imagen: "soldadora.jpg" },
+    { id: 11, nombre: "Clavos de madera 2", precio: 25, imagen: "clavo.jpg" },
+    { id: 12, nombre: "Tornillos punta de broca", precio: 15, imagen: "tornillo.jpg" }
 ];
 
 // --- FUNCIONES DEL CATÁLOGO ---
@@ -84,3 +90,4 @@ window.onload = () => mostrarProductos('todos');
 document.addEventListener('keypress', (e) => {
     if(e.key === 'Enter' && document.activeElement.id === 'user-input') enviarMensaje();
 });
+
