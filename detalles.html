@@ -3,94 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Producto | Coferra</title>
-    <link rel="stylesheet" href="estilos-ferre.css">
+    <title>Detalles del Producto - Coferra</title>
     <style>
-        
-        /* Unos estilos rápidos extra para esta página */
-        .contenedor-detalle {
-            max-width: 600px;
-            margin: 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .img-detalle { width: 100%; max-height: 400px; object-fit: contain; border-radius: 10px; }
-        .btn-whatsapp {
-            display: inline-block;
-            background-color: #25D366; /* Verde WhatsApp */
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-        .btn-whatsapp:hover { background-color: #128C7E; transform: scale(1.05); }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; text-align: center; }
+        .contenedor-detalle { background: white; max-width: 600px; margin: auto; padding: 30px; border-radius: 15px; shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        img { max-width: 100%; border-radius: 10px; height: 300px; object-fit: contain; }
+        h1 { color: #333; margin-top: 20px; }
+        .precio { font-size: 24px; color: #28a745; font-weight: bold; margin: 15px 0; }
+        .descripcion { color: #666; line-height: 1.6; margin-bottom: 25px; }
+        .btn-wa { background-color: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; }
+        .btn-wa:hover { background-color: #128c7e; }
+        .volver { display: block; margin-top: 20px; color: #007bff; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>COFERRA</h1>
-        <a href="index.html" style="color: white; text-decoration: none;">← Volver al catálogo</a>
-    </header>
+    <div class="contenedor-detalle">
+        <img id="img-detalle" src="" alt="Cargando...">
+        <h1 id="nombre-detalle">Cargando producto...</h1>
+        <div class="precio" id="precio-detalle">L. 0.00</div>
+        <p class="descripcion" id="desc-detalle">Cargando descripción...</p>
 
-    <div class="contenedor-detalle" id="vista-detalle">
-        </div>
+        <a id="btn-whatsapp" href="#" class="btn-wa">
+            Consultar Disponibilidad por WhatsApp
+        </a>
 
-    <script src="productos.js"></script>
+        <a href="index.html" class="volver">← Volver al catálogo</a>
+    </div>
 
     <script>
-        function cargarDetalleProducto() {
-            // 1. Obtener ID de la URL
-            const params = new URLSearchParams(window.location.search);
-            const idProducto = params.get('id');
-
-            // 2. Buscar el producto en el array de productos.js
-            const p = productos.find(item => item.id == idProducto);
-
-            if (p) {
-                // 3. Crear el mensaje personalizado para WhatsApp
-                const mensaje = `Hola Coferra! 👋 Vi el producto *${p.nombre}* en su página web y me gustaría más información.`;
-                const urlWa = `https://wa.me/${p.whatsapp}?text=${encodeURIComponent(mensaje)}`;
-
-                // 4. Inyectar el HTML
-                document.getElementById('vista-detalle').innerHTML = `
-                    <img src="${p.imagen}" alt="${p.nombre}" class="img-detalle">
-                    <p style="color: orange; font-weight: bold; margin-top:10px;">${p.categoria}</p>
-                    <h1>${p.nombre}</h1>
-                    <p>${p.descripcion}</p>
-                    <a href="${urlWa}" target="_blank" class="btn-whatsapp">
-                        Consultar por WhatsApp
-                    </a>
-                `;
-                document.title = `${p.nombre} | Coferra`;
-            } else {
-                document.getElementById('vista-detalle').innerHTML = "<h1>Producto no encontrado</h1>";
-            }
-        }
-
-        window.onload = cargarDetalleProducto;
-        // Dentro del script de detalle.html
-document.getElementById('vista-detalle').innerHTML = `
-    <img src="${p.imagen}" alt="${p.nombre}" class="img-detalle">
-    <p style="color: orange; font-weight: bold; margin-top:10px;">${p.categoria}</p>
-    <h1>${p.nombre}</h1>
-    <p>${p.descripcion}</p>
-    
-    <div class="banner-consulta">
-        <p>¿Quieres saber el precio o si tenemos existencias?</p>
-        <a href="${urlWa}" target="_blank" class="btn-whatsapp">
-            Preguntar por WhatsApp ahora
-        </a>
-    </div>
-`;
-    </script>
-
-</body>
-
-</html>
+        // 1. Necesitamos la misma lista de productos para buscar
+        const productos = [
+            { id: 1, nombre: "Lámina de Zinc Aluzinc", categoria: "techos", imagen: "https://tse1.explicit.bing.net/th/id/OIP.Emi3xdXv_U3mBpjEikPFTgHaFj?rs=1&pid=ImgDetMain&o=7&rm=3", precio: "L. 250.00", desc: "Lámina resistente de alta calidad, ideal para techos duraderos y protección contra el clima." },
+            { id: 2, nombre: "Taladro DeWalt 20V", categoria: "maquinas", imagen: "https://http2.mlstatic.com/D_NQ_NP_633420-MLA45467093493_042021-F.jpg", precio: "L. 3,500.00", desc: "Taladro inalámbrico profesional con batería de larga duración y potencia industrial." },
+            { id: 3, nombre: "Martillo", categoria: "herramientas", imagen: "https://tse2.mm.bing.net/th/id/OIP.tBKGVCFNd9TRhrLaUO6cDQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3", precio: "L. 180.00", desc: "Martillo de acero forjado con mango ergonómico para un agarre seguro." },
+            { id: 4, nombre: "Bolsa de Cemento Argos", categoria: "construccion", imagen: "https://tse4.mm.bing.net/th/id/OIP.GAVtxJs6XfT-iklFYxkFXwHaGf?rs=1&pid=ImgDetMain&o=7&rm=3", precio: "L. 210.00", desc: "Cemento gris de alta resistencia, el estándar de calidad para tus obras." },
+            { id:
